@@ -7,8 +7,6 @@ FROM whosgonna/kamailio-apks:$KAM_VERSION AS apks
 
 FROM alpine
 
-COPY --from=apks /home/builder /packages
-
 RUN --mount=type=bind,from=apks,source=/home/builder,target=/builder \
        cp builder/.abuild/-62633096.rsa.pub /etc/apk/keys/ \
     && echo '/builder/packages/kamailio/' >> /etc/apk/repositories \
